@@ -88,7 +88,8 @@ namespace Infrastructure
 
             services.AddScoped<IUnitOfWork, UnitOfWork>()
                     .AddScoped<IRefreshTokenRepository, RefreshTokenRepository>()
-                    .AddScoped<ICourseRepository, CourseRepository>();
+                    .AddScoped<ICourseRepository, CourseRepository>()
+                    .AddScoped<IEnrollementRepository, EnrollementRepository>();
 
             return services;
         }
