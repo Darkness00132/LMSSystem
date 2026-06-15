@@ -40,7 +40,7 @@ namespace Application.Services
             _cache = cache;
         }
 
-        public async Task<Guid> CreateCourseAsync(CreateCourseRequest request)
+        public async Task<Guid> CreateCourseAsync(Guid instructorId, CreateCourseRequest request)
         {
             _logger.LogInformation(
                 "Creating course with title: {Title}",
@@ -49,6 +49,7 @@ namespace Application.Services
             var course = _mapper.Map<Course>(request);
 
             course.Id = Guid.NewGuid();
+            course.InstructorId = instructorId;
             course.Status = CourseStatus.Draft;
 
             await _courseRepository.CreateAsync(course);

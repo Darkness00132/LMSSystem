@@ -8,7 +8,7 @@ namespace Application.Interfaces.Services
 
         Task<CourseDetailsDto> GetPublishedCourseAsync(Guid courseId);
 
-        Task<Guid> CreateCourseAsync(CreateCourseRequest request);
+        Task<Guid> CreateCourseAsync(Guid instructorId, CreateCourseRequest request);
 
         Task UpdateCourseAsync(
             Guid courseId,

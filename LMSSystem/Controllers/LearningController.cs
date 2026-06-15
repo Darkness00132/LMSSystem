@@ -2,6 +2,7 @@
 using Application.Dtos.Courses;
 using Application.Interfaces.Services;
 using Domain.Enums;
+using Application.Common.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,7 +31,7 @@ namespace LMSSystem.Controllers
         public async Task<ActionResult<CourseDetailsDto>> LearnCourse(
             Guid courseId)
         {
-            var studentId = Guid.Parse(User.FindFirst("sub")!.Value);
+            var studentId = Guid.Parse(User.FindFirst(AppClaims.UserId)!.Value);
 
             var result = await _learningService
                 .LearnCourseAsync(studentId, courseId);
@@ -47,7 +48,7 @@ namespace LMSSystem.Controllers
         public async Task<ActionResult<LearningContent>> GetContent(
             Guid contentId)
         {
-            var studentId = Guid.Parse(User.FindFirst("sub")!.Value);
+            var studentId = Guid.Parse(User.FindFirst(AppClaims.UserId)!.Value);
 
             var result = await _learningService
                 .GetContentAsync(studentId, contentId);
@@ -63,7 +64,7 @@ namespace LMSSystem.Controllers
         public async Task<ActionResult> CompleteContent(
             Guid contentItemId)
         {
-            var studentId = Guid.Parse(User.FindFirst("sub")!.Value);
+            var studentId = Guid.Parse(User.FindFirst(AppClaims.UserId)!.Value);
 
             await _learningService
                 .CompleteContentAsync(studentId, contentItemId);

@@ -518,6 +518,17 @@ namespace Infrastructure.Migrations
                 table: "AspNetRoleClaims",
                 column: "RoleId");
 
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "Name", "NormalizedName", "ConcurrencyStamp" },
+                values: new object[,]
+                {
+                    { new Guid("00000000-0000-0000-0000-000000000000"), "Student", "STUDENT", "00000000-0000-0000-0000-000000000000" },
+                    { new Guid("00000000-0000-0000-0000-000000000001"), "Instructor", "INSTRUCTOR", "00000000-0000-0000-0000-000000000001" },
+                    { new Guid("00000000-0000-0000-0000-000000000002"), "Assistant", "ASSISTANT", "00000000-0000-0000-0000-000000000002" },
+                    { new Guid("00000000-0000-0000-0000-000000000003"), "Admin", "ADMIN", "00000000-0000-0000-0000-000000000003" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles",

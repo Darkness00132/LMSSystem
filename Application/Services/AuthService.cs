@@ -14,17 +14,20 @@ namespace Application.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly IRefreshTokenRepository _refreshTokenRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IJwtTokenService _jwtTokenService;
         private readonly ILogger<AuthService> _logger;
 
         public AuthService(
             UserManager<User> userManager,
             IRefreshTokenRepository refreshTokenRepository,
+            IUnitOfWork unitOfWork,
             IJwtTokenService jwtTokenService,
             ILogger<AuthService> logger)
         {
             _userManager = userManager;
             _refreshTokenRepository = refreshTokenRepository;
+            _unitOfWork = unitOfWork;
             _jwtTokenService = jwtTokenService;
             _logger = logger;
         }
@@ -126,6 +129,7 @@ namespace Application.Services
             };
 
             await _refreshTokenRepository.AddAsync(refreshToken);
+            await _unitOfWork.SaveChangesAsync();
             return refreshToken.Token;
         }
     }

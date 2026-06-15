@@ -4,7 +4,7 @@
     {
         public Guid? SelectedOptionId { get; set; }
 
-        public string TextAnswer { get; set; }
+        public string? TextAnswer { get; set; }
 
         public bool IsCorrect { get; set; }
     }

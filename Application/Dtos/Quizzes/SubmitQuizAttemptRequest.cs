@@ -2,6 +2,6 @@
 {
     public class SubmitQuizAttemptRequest
     {
-        public List<QuizAnswerDto> Answers { get; set; }
+        public List<QuizAnswerDto> Answers { get; set; } = [];
     }
 }

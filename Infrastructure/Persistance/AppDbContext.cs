@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace Infrastructure.Persistance
 {
@@ -34,6 +35,7 @@ namespace Infrastructure.Persistance
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             // ── TPT one-to-one owned content ──────────────────────────────
             modelBuilder.Entity<ContentItem>()

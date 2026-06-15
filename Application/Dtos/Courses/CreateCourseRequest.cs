@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace Application.Dtos.Courses
 {
@@ -11,7 +12,7 @@ namespace Application.Dtos.Courses
         [MaxLength(2000)]
         public string? Description { get; set; }
 
-        public string? ThumbnailUrl { get; set; }
+        public IFormFile? Thumbnail { get; set; }
 
         public decimal? Price { get; set; }
     }

@@ -5,12 +5,12 @@ namespace Application.Dtos.Auth
     public class RegisterRequest
     {
         [StringLength(100, MinimumLength = 3)]
-        public string FullName { get; set; }
+        public string FullName { get; set; } = string.Empty;
 
         [EmailAddress]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         [StringLength(100, MinimumLength = 6)]
-        public string Password { get; set; }
+        public string Password { get; set; } = string.Empty;
     }
 }

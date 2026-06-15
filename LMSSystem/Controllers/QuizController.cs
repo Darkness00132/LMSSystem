@@ -1,6 +1,7 @@
 ﻿using Application.Dtos.Quizzes;
 using Application.Interfaces.Services;
 using Domain.Enums;
+using Application.Common.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -70,7 +71,7 @@ namespace LMSSystem.Controllers
         [HttpPost("quizzes/{quizId}/start")]
         public async Task<ActionResult<Guid>> StartQuiz(Guid quizId)
         {
-            var studentId = Guid.Parse(User.FindFirst("sub")!.Value);
+            var studentId = Guid.Parse(User.FindFirst(AppClaims.UserId)!.Value);
 
             var attemptId = await _quizService
                 .StartQuizAsync(studentId, quizId);

@@ -1,6 +1,7 @@
 ﻿using Application.Dtos.Courses;
 using Application.Interfaces.Services;
 using Domain.Enums;
+using Application.Common.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -50,10 +51,12 @@ namespace LMSSystem.Controllers
         [Authorize(Roles = nameof(UserRole.Instructor))]
         [HttpPost]
         public async Task<ActionResult> CreateCourse(
-            CreateCourseRequest request)
+            [FromForm] CreateCourseRequest request)
         {
+            var instructorId = Guid.Parse(User.FindFirst(AppClaims.UserId)!.Value);
+
             var courseId = await _courseService
-                .CreateCourseAsync(request);
+                .CreateCourseAsync(instructorId, request);
 
             return CreatedAtAction(
                 nameof(GetPublishedCourse),

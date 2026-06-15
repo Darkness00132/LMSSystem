@@ -1,5 +1,6 @@
 ﻿using Application.Dtos.Enrollments;
 using Application.Interfaces.Services;
+using Application.Common.Constants;
 using Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,7 @@ namespace LMSSystem.Controllers
         [HttpGet("enrollments/my")]
         public async Task<ActionResult<IEnumerable<EnrollmentDto>>> GetMyEnrollments()
         {
-            var studentId = Guid.Parse(User.FindFirst("sub")!.Value);
+            var studentId = Guid.Parse(User.FindFirst(AppClaims.UserId)!.Value);
 
             var result = await _enrollmentService
                 .GetMyEnrollmentsAsync(studentId);
@@ -42,7 +43,7 @@ namespace LMSSystem.Controllers
         [HttpPost("enrollments/{courseId}")]
         public async Task<ActionResult<Guid>> EnrollCourse(Guid courseId)
         {
-            var studentId = Guid.Parse(User.FindFirst("sub")!.Value);
+            var studentId = Guid.Parse(User.FindFirst(AppClaims.UserId)!.Value);
 
             var enrollmentId = await _enrollmentService
                 .EnrollCourseAsync(studentId, courseId);
